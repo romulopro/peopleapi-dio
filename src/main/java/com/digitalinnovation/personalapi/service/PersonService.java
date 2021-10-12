@@ -6,6 +6,7 @@ import java.util.List;
 import com.digitalinnovation.personalapi.dto.request.PersonDTO;
 import com.digitalinnovation.personalapi.dto.response.MessageResponseDTO;
 import com.digitalinnovation.personalapi.entity.Person;
+import com.digitalinnovation.personalapi.exception.PersonNotFoundException;
 import com.digitalinnovation.personalapi.mapper.PersonMapper;
 import com.digitalinnovation.personalapi.repository.PersonRepository;
 
@@ -37,5 +38,13 @@ public class PersonService {
         return allPeople.stream()
         .map(personMapper::toDTO)
         .collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(long id) throws PersonNotFoundException {
+        //Optional<Person> optionalPerson = personRepository.findById(id);
+        Person person = personRepository.findById(id)
+        .orElseThrow(()-> new PersonNotFoundException(id));
+        
+        return personMapper.toDTO(person);
     }
 }
