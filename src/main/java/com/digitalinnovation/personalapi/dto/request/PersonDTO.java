@@ -14,8 +14,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.digitalinnovation.personalapi.entity.Phone;
-
 import org.hibernate.validator.constraints.br.CPF;
 
 
@@ -41,8 +39,9 @@ public class PersonDTO {
         private String cpf;
     
         private LocalDate birthDate;
+
         @Valid
         @NotEmpty
-        private List<Phone> phones;
+        private List<PhoneDTO> phones;
     
 }
